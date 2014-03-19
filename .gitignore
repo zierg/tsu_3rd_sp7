@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+
+# we ignoring IDEA IDE files and directories. you can use your favorite IDE but be kind and add similar rules for this files
+
+.idea/
