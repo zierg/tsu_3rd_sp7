@@ -85,15 +85,6 @@ public class W1Task1Test {
         }
     }
 
-    private static Map<Integer, Integer> makeRandomNumbersAndQuantities() {
-        Map<Integer, Integer> nq = new HashMap<>();
-        nq.put(42, 123);
-        nq.put(32, 123);
-        nq.put(48, 12);
-        nq.put(1, 1);
-        return nq;
-    }
-
     Set<Integer> possibleSolutions(Map<Integer, Integer> numAndQuantity) {
         Set<Integer> possibleSolutions = new HashSet<>();
 
@@ -126,28 +117,41 @@ public class W1Task1Test {
         assertTrue(possibleSolutions.contains(solution));
     }
 
-    private void test42(Task1 task) {
+    private Map<Integer, Integer> make42numsAndQuantities() {
         Map<Integer, Integer> numsAndQuantities = new HashMap<>();
         numsAndQuantities.put(42, 42);
-
-        __testTaskWithNumsAndQuantities(task, numsAndQuantities);
+        return numsAndQuantities;
     }
 
-    private void testSingleRandomNumber(Task1 task) {
+    private Map<Integer, Integer> makeSingleRandomNumsAndQuantities() {
         Random r = new Random();
         Map<Integer, Integer> numsAndQuantities = new HashMap<>();
         numsAndQuantities.put(r.nextInt(), 2);
-
-        __testTaskWithNumsAndQuantities(task, numsAndQuantities);
+        return numsAndQuantities;
     }
 
-    private void testMultipleRandomNumbers(Task1 task) {
+    private Map<Integer, Integer> makeMultipleRandomNumsAndQuantities() {
         Random r = new Random();
         Map<Integer, Integer> numsAndQuantities = new HashMap<>();
         for (int i = 0; i < NUM_OF_MULTIPLE_NUMS; i++) {
             numsAndQuantities.put(r.nextInt(), NUM_OF_MULTIPLE_NUMS);
         }
 
+        return numsAndQuantities;
+    }
+
+    private void test42(Task1 task) {
+        Map<Integer, Integer> numsAndQuantities = make42numsAndQuantities();
+        __testTaskWithNumsAndQuantities(task, numsAndQuantities);
+    }
+
+    private void testSingleRandomNumber(Task1 task) {
+        Map<Integer, Integer> numsAndQuantities = makeSingleRandomNumsAndQuantities();
+        __testTaskWithNumsAndQuantities(task, numsAndQuantities);
+    }
+
+    private void testMultipleRandomNumbers(Task1 task) {
+        Map<Integer, Integer> numsAndQuantities = makeMultipleRandomNumsAndQuantities();
         __testTaskWithNumsAndQuantities(task, numsAndQuantities);
     }
 
@@ -190,20 +194,21 @@ public class W1Task1Test {
     @Test
     public void testNumberOfUniqueNumbers__DUMMY__() {
         Task1 task = new Task1();
-        Map<Integer, Integer> numsAndQuantities = new HashMap<>();
-        numsAndQuantities.put(42, 2);
+        Map<Integer, Integer> numsAndQuantities = make42numsAndQuantities();
+        __testNumberOfUniqueNumbers(task, numsAndQuantities);
+    }
+
+    @Test
+    public void testNumberOfUniqueNumbersSignle() {
+        Task1 task = new Task1();
+        Map<Integer, Integer> numsAndQuantities = makeSingleRandomNumsAndQuantities();
         __testNumberOfUniqueNumbers(task, numsAndQuantities);
     }
 
     @Test
     public void testNumberOfUniqueNumbersMultiple() {
         Task1 task = new Task1();
-        Random r = new Random();
-        Map<Integer, Integer> numsAndQuantities = new HashMap<>();
-        for (int i = 0; i < NUM_OF_MULTIPLE_NUMS; i++) {
-            numsAndQuantities.put(r.nextInt(), NUM_OF_MULTIPLE_NUMS);
-        }
-
+        Map<Integer, Integer> numsAndQuantities = makeMultipleRandomNumsAndQuantities();
         __testNumberOfUniqueNumbers(task, numsAndQuantities);
     }
 }
