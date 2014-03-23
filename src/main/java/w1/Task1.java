@@ -13,7 +13,7 @@ public class Task1 {
      * @return количество уникальных чисел
      */
     public int numberOfUniqueNumbers(int[] array) {
-        return 0;
+        return array.length - 1;
     }
 
     /**

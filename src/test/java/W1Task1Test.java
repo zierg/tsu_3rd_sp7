@@ -8,6 +8,7 @@ import java.util.*;
 public class W1Task1Test {
     private static final int ARAY_SIZE = (1024*1024);
     private static final int STOP_GENERATION_AFTER_NUM_OF_FAILS = 100;
+    private static final int NUM_OF_MULTIPLE_NUMS = 11;
 
     private static Set<Integer> makeSetWithRandomInts(int size) {
         Random r = new Random();
@@ -105,6 +106,9 @@ public class W1Task1Test {
                 possibleSolutions.add(number);
         }
 
+        if (possibleSolutions.isEmpty())
+            throw new RuntimeException("internal test error: empty solution");
+
         return possibleSolutions;
     }
 
@@ -114,17 +118,92 @@ public class W1Task1Test {
         return array;
     }
 
-    @Test
-    public void testMostFrequentNumber() {
-        Map<Integer, Integer> numsAndQuantities = makeRandomNumbersAndQuantities();
-        int[] array = prepareArray(ARAY_SIZE, numsAndQuantities);
+    private void __testTaskWithNumsAndQuantities(Task1 task, Map<Integer, Integer> numsAndQuantities) {
         Set<Integer> possibleSolutions = possibleSolutions(numsAndQuantities);
 
-        if (possibleSolutions.isEmpty())
-            throw new RuntimeException("internal test error: empty solution");
-
-        Task1 task = new Task1();
+        int[] array = prepareArray(ARAY_SIZE, numsAndQuantities);
         int solution = task.mostFrequentNumber(array);
         assertTrue(possibleSolutions.contains(solution));
+    }
+
+    private void test42(Task1 task) {
+        Map<Integer, Integer> numsAndQuantities = new HashMap<>();
+        numsAndQuantities.put(42, 42);
+
+        __testTaskWithNumsAndQuantities(task, numsAndQuantities);
+    }
+
+    private void testSingleRandomNumber(Task1 task) {
+        Random r = new Random();
+        Map<Integer, Integer> numsAndQuantities = new HashMap<>();
+        numsAndQuantities.put(r.nextInt(), 2);
+
+        __testTaskWithNumsAndQuantities(task, numsAndQuantities);
+    }
+
+    private void testMultipleRandomNumbers(Task1 task) {
+        Random r = new Random();
+        Map<Integer, Integer> numsAndQuantities = new HashMap<>();
+        for (int i = 0; i < NUM_OF_MULTIPLE_NUMS; i++) {
+            numsAndQuantities.put(r.nextInt(), NUM_OF_MULTIPLE_NUMS);
+        }
+
+        __testTaskWithNumsAndQuantities(task, numsAndQuantities);
+    }
+
+    @Test
+    public void testMostFrequentNumber__DUMMY__() {
+        Task1 task = new Task1();
+        test42(task);
+    }
+
+    @Test
+    public void testMostFrequentNumberSingle() {
+        Task1 task = new Task1();
+        testSingleRandomNumber(task);
+    }
+
+    @Test
+    public void testMostFrequentNumberMultiple() {
+        Task1 task = new Task1();
+        testMultipleRandomNumbers(task);
+    }
+
+
+    private static int sumOfAllValues(Map<Integer, Integer> m) {
+        int a = 0;
+        for (Integer v : m.values())
+            a += v;
+        return a;
+    }
+
+
+    private void __testNumberOfUniqueNumbers(Task1 task, Map<Integer, Integer> numsAndQuantities) {
+        int[] array = prepareArray(ARAY_SIZE, numsAndQuantities);
+
+        int solution = task.numberOfUniqueNumbers(array);
+        int trueSolution = array.length - sumOfAllValues(numsAndQuantities) / 2;
+        assertEquals(solution, trueSolution);
+    }
+
+
+    @Test
+    public void testNumberOfUniqueNumbers__DUMMY__() {
+        Task1 task = new Task1();
+        Map<Integer, Integer> numsAndQuantities = new HashMap<>();
+        numsAndQuantities.put(42, 2);
+        __testNumberOfUniqueNumbers(task, numsAndQuantities);
+    }
+
+    @Test
+    public void testNumberOfUniqueNumbersMultiple() {
+        Task1 task = new Task1();
+        Random r = new Random();
+        Map<Integer, Integer> numsAndQuantities = new HashMap<>();
+        for (int i = 0; i < NUM_OF_MULTIPLE_NUMS; i++) {
+            numsAndQuantities.put(r.nextInt(), NUM_OF_MULTIPLE_NUMS);
+        }
+
+        __testNumberOfUniqueNumbers(task, numsAndQuantities);
     }
 }
