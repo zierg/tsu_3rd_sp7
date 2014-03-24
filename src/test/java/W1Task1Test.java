@@ -186,7 +186,13 @@ public class W1Task1Test {
         int[] array = prepareArray(ARAY_SIZE, numsAndQuantities);
 
         int solution = task.numberOfUniqueNumbers(array);
-        int trueSolution = array.length - sumOfAllValues(numsAndQuantities) / 2;
+        /*
+         we have a map where key is a number an value is a quantity of this number
+         so we can calculate number of unqie numbers in the array using this formula:
+          (lenght of array) - (quantity of non-unqie numbers in the array) + (number of non-unique numbers)
+         note: we must add number of non-unique numbers because we need to count ser of same number as one single number
+         */
+        int trueSolution = array.length - sumOfAllValues(numsAndQuantities) + numsAndQuantities.size();
         assertEquals(solution, trueSolution);
     }
 
