@@ -11,10 +11,6 @@ import java.util.Set;
  * целые числа (Integer).
  */
 public class IntegerMultiset {
-    public IntegerMultiset() {
-        Set<Integer> s = new HashSet<>();
-    }
-
     /**
      * Добавляет элемент "e"
      * @param e
