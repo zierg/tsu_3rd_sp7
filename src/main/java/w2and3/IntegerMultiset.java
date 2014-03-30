@@ -1,8 +1,5 @@
 package w2and3;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Вы знаете, что такое "множество". В java для работы со множествами используют классы, реализующие
  * интерфейс "Set" (например, HashSet и TreeSet).
