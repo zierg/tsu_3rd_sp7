@@ -11,6 +11,6 @@ public class Intro {
      * @return a + b
      */
     public int sum(int a, int b) {
-        return a - b;
+        return a + b;
     }
 }
