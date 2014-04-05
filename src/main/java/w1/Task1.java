@@ -38,6 +38,24 @@ public class Task1 {
      * @return самое часто встречающееся число (или одно из, если таковых несколько)
      */
     public int mostFrequentNumber(int[] array) {
-        return 42;
+        int[] sortedArray = Arrays.copyOfRange(array, 0, array.length);
+        Arrays.sort(sortedArray);
+        int mostFrequent = sortedArray[0];
+        int lastChecked = sortedArray[0];
+        int lastFrequency = 1;
+        int frequency = 1;
+        for (int i = 1; i < sortedArray.length; i++) {
+            if (sortedArray[i] != lastChecked) {
+                frequency = 1;
+                lastChecked = sortedArray[i];
+            } else {
+                frequency++;
+                if (frequency > lastFrequency) {
+                    lastFrequency = frequency;
+                    mostFrequent = sortedArray[i];
+                }
+            }
+        }
+        return mostFrequent;
     }
 }
