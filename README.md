@@ -3,5 +3,5 @@
 
 Repository for tasks on TSU Java programming courses
 
-Сделано задание 01
+Выполненные задания: w1
 Комиссаров И. Д.
