@@ -1,5 +1,8 @@
 package w2and3;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Вы знаете, что такое "множество". В java для работы со множествами используют классы, реализующие
  * интерфейс "Set" (например, HashSet и TreeSet).
@@ -8,13 +11,21 @@ package w2and3;
  * целые числа (Integer).
  */
 public class IntegerMultiset {
+    private Map<Integer, Integer> values = new HashMap<>();
     /**
      * Добавляет элемент "e"
      * @param e
      * @return true, если в мультимножестве уже есть такой элемент и false иначе
      */
     public boolean add(Integer e) {
-        return false;
+        Integer amountOfValues = values.get(e);
+        if (amountOfValues == null) {
+            values.put(e, 1);
+            return false;
+        } else {
+            values.put(e, amountOfValues+1);
+            return true;
+        }
     }
 
     /**
@@ -23,7 +34,7 @@ public class IntegerMultiset {
      * @return true, если элемент "e" присутствует в мультимножестве и false иначе
      */
     public boolean contains(Integer e) {
-        return false;
+        return values.containsKey(e);
     }
 
     /**
@@ -32,7 +43,16 @@ public class IntegerMultiset {
      * @return true, если удаление имело место (т.е. "e" был в мультимножестве перед удалением) и false иначе
      */
     public boolean pop(Integer e) {
-        return false;
+        if ( !contains(e) ) {
+            return false;
+        }
+        int amountOfValues = values.get(e);
+        if (amountOfValues == 1) {
+            values.remove(e);
+        } else {
+            values.put(e, amountOfValues-1);
+        }
+        return true;
     }
 
     /**
@@ -41,6 +61,6 @@ public class IntegerMultiset {
      * @return true, если удаление имело место и false иначе
      */
     public boolean remove(Integer e) {
-        return false;
+        return values.remove(e) != null;
     }
 }
