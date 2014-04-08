@@ -24,7 +24,7 @@ public class SinglyLinkedList {
     /**
      * Сортирует односвязный список.
      */
-    void sort() {
+    public void sort() {
 
     }
 }
