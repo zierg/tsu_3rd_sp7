@@ -18,7 +18,7 @@ public class W2and3IntegerMultisetTest {
             int n = random.nextInt();
             if (!r.containsKey(n)) {
                 int q = 0;
-                while ((q = random.nextInt(MAX_QUANTITY)) != 0); // warning! tricky (may be) code
+                while ((q = random.nextInt(MAX_QUANTITY)) == 0); // warning! tricky (may be) code
                 r.put(n, q);
             }
         }
@@ -31,7 +31,7 @@ public class W2and3IntegerMultisetTest {
             int n = e.getKey();
             int q = e.getValue();
 
-            while (--q > 0) multiset.add(n);
+            while (--q >= 0) multiset.add(n);
         }
     }
 
@@ -45,7 +45,7 @@ public class W2and3IntegerMultisetTest {
             int n = e.getKey();
             int q = e.getValue();
 
-            while (--q > 0) {
+            while (--q >= 0) {
                 assertTrue(multiset.contains(n));
                 boolean elementWasExisted = multiset.pop(n);
                 assertTrue(elementWasExisted);
