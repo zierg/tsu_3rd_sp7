@@ -53,6 +53,9 @@ public class SinglyLinkedList {
             newList.addListNode(nodeToPop);
             putList(newList, sortedList, 0);
         }
+        // После того, как исходный список опустошён, делаем слияние всех
+        // списков, которые остались в стеке, и забираем полный список из
+        // конца стека
         for (int i = 1; i < sortedList.length; i++) {
             putList(sortedList[i-1], sortedList, i);
         }
@@ -71,6 +74,14 @@ public class SinglyLinkedList {
         return builder.toString();
     }
     
+    /**
+     * Кладёт отсортированный список выбранную позицию стрека списков. Если
+     * место занято, производит слияние и кладёт полученный список в следующую
+     * позицию (по такому же принципу).
+     * @param listToPut отсортированный список, который нужно поместить в стек
+     * @param sortedLists стек списков
+     * @param startPosition позиция, в которую нужно поместить список
+     */
     private void putList(SinglyLinkedList listToPut, SinglyLinkedList[] sortedLists, int startPosition) {
         if (startPosition >= sortedLists.length || listToPut == null) {
             return;
@@ -107,7 +118,8 @@ public class SinglyLinkedList {
             }
             latestAddedNode = nodeToAdd;
         }
-        
+        // когда один из списков опустел, оставшиеся значения из другого
+        // списка просто добавляются в конец
         SinglyLinkedList notEmptyList;
         if ( !list1.isEmpty() ) {
             notEmptyList = list1;
