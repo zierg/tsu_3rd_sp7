@@ -3,5 +3,5 @@
 
 Repository for tasks on TSU Java programming courses
 
-Выполненные задания: w1, w2and3
-Комиссаров И. Д.
+Комиссаров Иван
+Выполненные задания: Task1 и Task2 (w1), IntegerMultiset(w2and3), SinglyLinkedList(w4)
